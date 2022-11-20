@@ -34,7 +34,7 @@ export class virtual_space{
         this._setupLight();
         this._setupModel();
 
-        this._setupBackground1();
+        // this._setupBackground1();
         this._setupBackground2();
         this.import_graffiti();
         this._setupControls2();

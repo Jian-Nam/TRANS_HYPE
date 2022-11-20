@@ -11,7 +11,7 @@ body {
 
 .text {
     font-family: 'Noto Sans KR', sans-serif;
-    /* font-family: 'JetBrains Mono', monospace; */
+    font-family: 'JetBrains Mono', monospace;
     color:#FFFFFF;
     z-index: 1;
 
@@ -90,30 +90,63 @@ li > img {
 
 #graffity_types_container{
     position:absolute;
+    overflow: hidden;
     top:100%;
-    width: 100%;
-    height:  100%;
+    width: 80%;
+    height: 80%;
+    /* left:0;
+    right:4vh;
+    margin-left: auto;
+    margin-right: auto; */
+    margin-left:10%;
+    margin-top:5%;
     background-color: #202020;
     z-index: 1;
 
-    border-top: 1px solid;
-    border-color: #FFFFFF;
+    border: #bb00FF 1px solid;
 
     -webkit-transition: top 500ms cubic-bezier(.6,0,.4,1);
     -ms-transition: top 500ms cubic-bezier(.6,0,.4,1);
     transition: top 500ms cubic-bezier(.6,0,.4,1);
 }
 
-#lists_button{
-    position:absolute;
-    font-size: 3vh;
+#window_top_bar{
+    position: absolute;
+    top:0;
+    width:100%;
+    height:3vh;
+    background-color: #202020;
+}
+
+#window_name{
+    font-size: 1.5vh;
+    position: absolute;
     margin-left: auto;
     margin-right: auto; 
+    margin-top: auto;
+    margin-bottom: auto; 
+    top: 0;
+    bottom: 0;
     left: 0;
     right: 0;
     text-align: center;
-    top: 3vh;
+    line-height: 3vh;
+}
 
+#lists_button{
+    position:absolute;
+    width:3vh;
+    height: 3vh;
+    background-color: #bb00ff;
+    color:#202020;
+    font-size: 1.5vh;
+    margin-top: auto;
+    margin-bottom: auto; 
+    top: 0;
+    bottom: 0;
+    right:0;
+    text-align: center;
+    line-height: 3vh;
 }
 
 #left_button{

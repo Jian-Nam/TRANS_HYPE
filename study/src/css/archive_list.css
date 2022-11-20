@@ -12,6 +12,7 @@ body {
 
 .text {
     font-family: 'Noto Sans KR', sans-serif;
+
     color:white;
     z-index: 2;
 
@@ -94,14 +95,14 @@ body {
     left:10vh;
     font-weight: 900;
     font-size: 1.5vw;
-    opacity: 0.3;
+    opacity: 0.5;
 }
 
 
 .area_info{
     position: absolute;
     left:2vh;
-    opacity:0.1;
+    opacity:0.5;
 }
 
 .address_kr{
@@ -201,12 +202,13 @@ body {
     left:5%;
     width:30%;
     word-break:keep-all;
+    z-index: 2;
 }
 
 #Place_photo{
     position: absolute;
     right:3%;
-    width:60%;
+    width:100%;
 
 }
 #p01{

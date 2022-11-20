@@ -201,36 +201,34 @@ body {
 }
 
 #Area{
-    margin-top: 15vh;
-    margin-left: 3vh;
+    bottom: 6vh;
+    left: 6vh;
     position: absolute;
     color: white;
 }
 
 #Area_id{
     font-weight: 900;
-    font-size: 5vh;
+    font-size: 10vh;
 }
 
 #Area_info{
-    margin-top: 1.5vh;
+    margin-top: 2vh;
+    font-size: 2.5vh;
 }
 
 #Area_size{
     margin-top: 0.3vh;
     font-weight: 400;
-    font-size: 2vh;
 }
 
 #Occupied{
     margin-top: 0.3vh;
     font-weight: 400;
-    font-size: 2vh;
 }
 
 #Area_owner{
     margin-top: 0.3vh;
     font-weight: 900;
-    font-size: 2vh;
     color:#00ffff
 }

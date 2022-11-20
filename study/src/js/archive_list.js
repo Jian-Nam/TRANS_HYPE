@@ -45,10 +45,6 @@ class App{
             this.area_list.appendChild(li_elem);
             this.listElements.push(li_elem);
 
-            let img_elem = document.createElement("img");
-            img_elem.setAttribute("id", area_id + "_2d_map")
-            // img_elem.src  = "./study/src/maps/2d_map/" + area_id + ".svg"
-            this.virtual_map_2d.appendChild(img_elem);
         }
 
         this.Place_id = document.querySelector("#Place_id");
@@ -83,18 +79,14 @@ class App{
                 // value.style.paddingTop = "2vh";
                 // value.style.paddingBottom = "2vh";
                 value.style.background = "#101010";
-                this.virtual_map_2d.style.opacity = 0.9;
                 // console.log(document.querySelector("#" + value.id + "_2d_map"))
-                document.querySelector("#" + value.id + "_2d_map").style.filter = "invert(54%) sepia(55%) saturate(3823%) hue-rotate(85deg) brightness(129%) contrast(114%)"
             });
             value.addEventListener("mouseout", ()=>{
-                value.children[0].style.opacity = 0.3;
-                value.children[1].style.opacity = 0.1;
+                value.children[0].style.opacity = 0.5;
+                value.children[1].style.opacity = 0.5;
                 // value.style.paddingTop = "1vh";
                 // value.style.paddingBottom = "1vh";
                 value.style.background = "#000000";
-                this.virtual_map_2d.style.opacity = 0.1;
-                document.querySelector("#" + value.id + "_2d_map").style.filter = "invert(100%) sepia(100%) saturate(0%) hue-rotate(292deg) brightness(108%) contrast(108%)"
             });
             value.addEventListener("click", (event)=>{this.show_palce(event.currentTarget.id)});
         }
