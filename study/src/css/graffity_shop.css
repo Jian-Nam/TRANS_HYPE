@@ -11,6 +11,7 @@ body {
 
 .text {
     font-family: 'Noto Sans KR', sans-serif;
+    /* font-family: 'JetBrains Mono', monospace; */
     color:#FFFFFF;
     z-index: 1;
 

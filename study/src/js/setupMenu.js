@@ -4,13 +4,7 @@ export class setupMenu{
     }
     setup_menu(){
 
-        // this.title = document.querySelector("#title");
-        // this.toggle = document.querySelector("#toggle");
-        // this.archive_list = document.querySelector("#archive_list");
-        // this.place_shop = document.querySelector("#place_shop");
-        // this.graffity_shop = document.querySelector("#graffity_shop");
-        // this.project =  document.querySelector("#project");
-        // this.contact =  document.querySelector("#contact");
+
 
 
         this.title = document.createElement("div");
@@ -45,24 +39,33 @@ export class setupMenu{
         this.contact.innerHTML = "Contact"
 
         this.title.append(this.title_img);
-        this.menu.append(this.contact, this.project,  this.archive_list, this.place_shop, this.graffity_shop, this.toggle,)
+        this.menu.append(this.contact, this.project,  this.archive_list, this.place_shop, this.graffity_shop, this.toggle,);
+        let pages = ['archive_space', 'graffity_shop', 'place_shop', 'archive_list', 'project', 'contact'];
+        let page = location.href.split('/').slice(-1)[0].split('.')[0]
+        let page_index = Math.abs(pages.indexOf(page)-(pages.length-1));
+
         document.body.append(this.title, this.menu)
 
         this.menu_elements = document.querySelector("#menu").children;
 
         for(let i = 0; i<this.menu_elements.length; i++){
-            this.menu_elements[i].addEventListener("mouseover", (event) => {
+            if(i == page_index){
                 this.menu_elements[i].style.color = "#bb00ff";
-                // this.menu_elements[i].style.width = "8vh";
-                // this.menu_elements[i].style.lineHeight = "8vh";
                 this.menu_elements[i].style.background = "#00ffff"
-            });
-            this.menu_elements[i].addEventListener("mouseout", (event) => {
-                this.menu_elements[i].style.color = "white";
-                this.menu_elements[i].style.width = "4vh";
-                this.menu_elements[i].style.lineHeight = "4vh";
-                this.menu_elements[i].style.background = "#bb00ff"
-            });
+            }else{
+                this.menu_elements[i].addEventListener("mouseover", (event) => {
+                    this.menu_elements[i].style.color = "#bb00ff";
+                    // this.menu_elements[i].style.width = "8vh";
+                    // this.menu_elements[i].style.lineHeight = "8vh";
+                    this.menu_elements[i].style.background = "#00ffff"
+                });
+                this.menu_elements[i].addEventListener("mouseout", (event) => {
+                    this.menu_elements[i].style.color = "#ffffff";
+                    this.menu_elements[i].style.width = "4vh";
+                    this.menu_elements[i].style.lineHeight = "4vh";
+                    this.menu_elements[i].style.background = "#bb00ff"
+                });
+            }
         }
 
         this.title.addEventListener("click", this.go_home.bind(this));
@@ -100,7 +103,6 @@ export class setupMenu{
     }
 
     go_home(){
-        console.log("go home");
-        document.location.href = "index.html";
+        location.href = "index.html";
     }
 }

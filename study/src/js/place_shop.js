@@ -11,20 +11,19 @@ class App{
         this.area_list = document.querySelector("#area_list");
         this.area_list_container = document.querySelector("#area_list_container");
 
-        this.area_list_container.addEventListener("mouseover", () => {
-            this.area_list_container.style.right = "4vh"
-        })
-        this.area_list_container.addEventListener("mouseout", () => {
-            this.area_list_container.style.right = "-32vh"
-        })
+        // this.area_list_container.addEventListener("mouseover", () => {
+        //     this.area_list_container.style.right = "4vh"
+        // })
+        // this.area_list_container.addEventListener("mouseout", () => {
+        //     this.area_list_container.style.right = "-32vh"
+        // })
 
         this.virtual_map_2d = document.querySelector("#virtual_map_2d");
 
-        console.log(this.area_list)
 
         this.listElements = [];
         for(let area_id in Area_table){
-            console.log(area_id)
+
             let li_elem = document.createElement("li");
             let area_id_elem = document.createElement("div");
             let area_info_elem = document.createElement("div");
@@ -41,7 +40,7 @@ class App{
             area_owner_elem.classList.add("area_owner");
 
             area_id_elem.innerHTML = area_id;
-            area_size_elem.innerHTML = "Area_size : " + Area_table[area_id].size;
+            area_size_elem.innerHTML = "Area_size: " + Area_table[area_id].size;
             area_subtext_elem.innerHTML = "Occupied by";
             area_owner_elem.innerHTML = Area_table[area_id].owner;
 
@@ -95,23 +94,18 @@ class App{
     add_listPageEvent(){
 
         for(let value of this.listElements){
-            console.log(value.firstElementChild.style)
             value.addEventListener("mouseover", ()=>{
                 value.children[0].style.opacity = 1;
                 value.children[1].style.opacity = 1;
-                value.style.paddingTop = "2vh";
-                value.style.paddingBottom = "2vh";
                 value.style.background = "#101010";
                 this.virtual_map_2d.style.opacity = 0.9;
                 // console.log(document.querySelector("#" + value.id + "_2d_map"))
-                document.querySelector("#" + value.id + "_2d_map").style.filter = "invert(54%) sepia(55%) saturate(3823%) hue-rotate(85deg) brightness(129%) contrast(114%)"
+                document.querySelector("#" + value.id + "_2d_map").style.filter ="invert(99%) sepia(99%) saturate(7499%) hue-rotate(102deg) brightness(104%) contrast(102%)"
             });
             value.addEventListener("mouseout", ()=>{
-                value.children[0].style.opacity = 0.3;
-                value.children[1].style.opacity = 0.1;
-                value.style.paddingTop = "1vh";
-                value.style.paddingBottom = "1vh";
-                value.style.background = "#000000";
+                value.children[0].style.opacity = 0.5;
+                value.children[1].style.opacity = 0.5;
+                value.style.background = "#101010";
                 this.virtual_map_2d.style.opacity = 0.1;
                 document.querySelector("#" + value.id + "_2d_map").style.filter = "invert(100%) sepia(100%) saturate(0%) hue-rotate(292deg) brightness(108%) contrast(108%)"
             });
@@ -121,7 +115,7 @@ class App{
 
     show_palce(current_id){
         this.Area_id.innerHTML = current_id;
-        this.Area_size.innerHTML = "Area_size : " + Area_table[current_id].size;
+        this.Area_size.innerHTML = "Area_size: " + Area_table[current_id].size;
         this.Area_owner.innerHTML = Area_table[current_id].owner;
         this.reset_model(current_id);
     }
@@ -163,7 +157,6 @@ class App{
     }
 
     reset_model(name){
-        console.log(name)
         const objLoader = new OBJLoader();
 
 

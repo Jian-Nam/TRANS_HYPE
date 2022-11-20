@@ -79,7 +79,6 @@ class App {
 
         this.index_now = 1;
         for(let value of this.listElements){
-            console.log(value.firstElementChild.style)
             value.addEventListener("mouseover", ()=>{
                 value.style.background = "rgba(20, 20, 20, 1.0) "
                 value.firstElementChild.style.filter = "invert(97%) sepia(100%) saturate(1557%) hue-rotate(103deg) brightness(105%) contrast(102%)" });

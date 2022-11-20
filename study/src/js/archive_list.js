@@ -18,11 +18,9 @@ class App{
 
         this.virtual_map_2d = document.querySelector("#virtual_map_2d");
 
-        console.log(this.area_list)
 
         this.listElements = [];
         for(let area_id in Place_table){
-            console.log(area_id)
             let li_elem = document.createElement("li");
             let area_id_elem = document.createElement("div");
             let area_info_elem = document.createElement("div");
@@ -79,7 +77,6 @@ class App{
     add_listPageEvent(){
 
         for(let value of this.listElements){
-            console.log(value.firstElementChild.style)
             value.addEventListener("mouseover", ()=>{
                 value.children[0].style.opacity = 1;
                 value.children[1].style.opacity = 1;
