@@ -20,6 +20,9 @@ export class virtual_space{
         this.area_price = document.querySelector('#Price');
         this.building_size = document.querySelector('#Building_size');
 
+        this.time_stamp = document.querySelector('#time_stamp');
+        this.camera_position =document.querySelector('#camera_position');
+
         const renderer = new THREE.WebGL1Renderer({antialias: true});
         renderer.setPixelRatio(window.devicePixelRatio);
         this.container.appendChild(renderer.domElement);
@@ -417,7 +420,14 @@ export class virtual_space{
         this._renderer.setClearColor( 0x000000, 0);
         //auto rotation
         time *= 0.001; // second unit
+        const date = new Date(Date.now())
 
+        this.time_stamp.innerHTML = date;
+        this.camera_position.innerHTML = 
+            "CAMERA POSITION (X: " + this._camera.position.x.toFixed(3) + 
+            " Y: " + this._camera.position.y.toFixed(3) +  
+            " Z: " + this._camera.position.z.toFixed(3) + ")";
+        // if(this.bg2){
         // if(this.bg2){
         //     const deltaTime = time - this._previousTime;
         //     let offset = 30;
@@ -440,7 +450,7 @@ export class virtual_space{
         }
         const deltaTime = time - this._previousTime;
         document.querySelector("#gg").scrollLeft += deltaTime*100
-        console.log(deltaTime)
+        // console.log(deltaTime)
 
         //show animation
         if(this._mixer) {
