@@ -1,7 +1,7 @@
 import * as THREE from '../../build/three.module.js'
 import { GLTFLoader } from "../../examples/jsm/loaders/GLTFLoader.js"
 import { OBJLoader } from "../../examples/jsm/loaders/OBJLoader.js"
-import { Area_table } from '../db/database.js';
+import { Area_table, Place_table } from '../db/database.js';
 
 
 
@@ -37,7 +37,7 @@ export class virtual_space{
         // this._setupBackground1();
         this._setupBackground2();
         this.import_graffiti();
-        this._setupControls2();
+        this._setupControls1();
 
 
         this.resize();
@@ -45,6 +45,8 @@ export class virtual_space{
         
         requestAnimationFrame(this.render.bind(this));
     }
+
+
 
 
 
@@ -246,7 +248,18 @@ export class virtual_space{
             // for(let id in animationsMap){
             //     animationsMap[id].play();
             // }
-        })
+        });
+
+        this.bg_imgs = document.querySelector("#gg")
+        // for(let place in Place_table){
+        //     let place_info = Place_table[place];
+        //     let img = document.createElement("img");
+        //     let figure = document.createElement("figure");
+        //     img.src = "./study/src/photoes/" + place_info.pic2;
+        //     figure.append(img)
+        //     this.bg_imgs.append(figure);
+        // }
+        
     }
 
     import_graffiti(){
@@ -284,8 +297,10 @@ export class virtual_space{
 
     move_bg(event){
         event.preventDefault();
-        if(this.bg){
-            this.bg.position.y += event.deltaY*0.01
+        if(this.graffiti){
+            let speed = 0.0002;
+            this.graffiti.position.y += event.deltaY*speed*4
+            document.querySelector("#gg").scrollLeft += event.deltaY
         }
     }
 
@@ -423,6 +438,9 @@ export class virtual_space{
             this.cylinder_left.rotation.z += deltaTime*speed
 
         }
+        const deltaTime = time - this._previousTime;
+        document.querySelector("#gg").scrollLeft += deltaTime*100
+        console.log(deltaTime)
 
         //show animation
         if(this._mixer) {

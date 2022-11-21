@@ -47,6 +47,7 @@ class App{
 
         }
 
+        this.show = document.querySelector("#show");
         this.Place_id = document.querySelector("#Place_id");
         this.address_kr = document.querySelector("#address_kr")
         this.address_eng = document.querySelector("#address_eng")
@@ -93,6 +94,7 @@ class App{
     }
 
     show_palce(current_id){
+        this.show.scroll(0, 0);
         this.Place_id.innerHTML = current_id;
         this.address_kr.innerHTML = Place_table[current_id].address_kr;
         this.address_eng.innerHTML = Place_table[current_id].address_eng;
@@ -101,9 +103,9 @@ class App{
         this.wall_size.innerHTML = "Wall Size : " + Place_table[current_id].wall_size;
         this.discription.innerHTML = Place_table[current_id].discription;
 
-        this.p01.src = "./study/src/photoes/" + Place_table[current_id].pic1;
-        this.p02.src = "./study/src/photoes/" + Place_table[current_id].pic2;
-        this.p03.src = "./study/src/photoes/" + Place_table[current_id].pic3;
+        this.p01.src = "./study/src/photoes/" + Place_table[current_id].pic2;
+        this.p02.src = "./study/src/photoes/" + Place_table[current_id].pic3;
+        this.p03.src = "./study/src/photoes/" + Place_table[current_id].pic1;
     }
 
 

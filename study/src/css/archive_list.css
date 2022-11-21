@@ -181,7 +181,6 @@ body {
 
 #show{
     position: absolute;
-    color: white;
     width:70%;
     height:100%;
     overflow: hidden;
@@ -200,7 +199,7 @@ body {
 #Place_info{
     position: absolute;
     left:5%;
-    width:30%;
+    width:35%;
     word-break:keep-all;
     z-index: 2;
 }
@@ -208,7 +207,7 @@ body {
 #Place_photo{
     position: absolute;
     right:3%;
-    width:100%;
+    width:80%;
 
 }
 #p01{

@@ -9,6 +9,7 @@ body {
 }
 .text {
     font-family: 'Noto Sans KR', sans-serif;
+    font-family: 'JetBrains Mono', monospace;
     color:#FFFFFF;
     z-index: 1;
 
@@ -19,4 +20,33 @@ body {
 
 .clickable{
     cursor: pointer;
+}
+
+.container{
+    position: absolute;
+    width:100%;
+    height:85%;
+    top:15%;
+    background-color: #202020;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-content: space-evenly;
+    align-items: center;
+    align-content: center;
+}
+.item{
+    color:#FFFFFF;
+    height:98%;
+    width:24%;
+    /* background-color: #bb00ff; */
+    border: #bb00ff 1px solid;
+    line-height: 150%;
+}
+#padder{
+    width:4vh;
+    height:98%;
+    border: #bb00ff 1px solid;
 }
