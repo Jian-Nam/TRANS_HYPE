@@ -95,12 +95,12 @@ class App{
 
     show_palce(current_id){
         this.show.scroll(0, 0);
-        this.Place_id.innerHTML = current_id;
+        this.Place_id.innerHTML = "Place id - " + current_id + "<br><br>";
         this.address_kr.innerHTML = Place_table[current_id].address_kr;
         this.address_eng.innerHTML = Place_table[current_id].address_eng;
         this.graffiti_size.innerHTML = "Graffiti Size : " + Place_table[current_id].graffiti_size;
         this.graffiti_style.innerHTML = "Graffiti Style : " + Place_table[current_id].graffiti_style;
-        this.wall_size.innerHTML = "Wall Size : " + Place_table[current_id].wall_size;
+        this.wall_size.innerHTML = "Wall Size : " + Place_table[current_id].wall_size + "<br><br>";
         this.discription.innerHTML = Place_table[current_id].discription;
 
         this.p01.src = "./study/src/photoes/" + Place_table[current_id].pic2;

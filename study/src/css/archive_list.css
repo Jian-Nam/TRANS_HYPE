@@ -74,8 +74,8 @@ body {
 }
 
 #area_list > li{
-    padding-top:2vh;
-    padding-bottom:10vh;
+    padding-top:3vh;
+    padding-bottom:5vh;
     left:0;
 
     width:100%;
@@ -185,8 +185,7 @@ body {
     height:100%;
     overflow: hidden;
     overflow-y: scroll;
-    font-size: 1.5vw;
-    font-weight: 900;
+
     line-height: 170%;
     -ms-overflow-style: none;
 }
@@ -198,10 +197,19 @@ body {
 
 #Place_info{
     position: absolute;
+    font-size: 1.2vw;
+    font-weight: 900;
+    line-height: 170%;
     left:5%;
-    width:35%;
+    width:50%;
     word-break:keep-all;
     z-index: 2;
+}
+
+#discription{
+    font-size: 2vw;
+    font-weight: 900;
+    line-height: 170%;
 }
 
 #Place_photo{

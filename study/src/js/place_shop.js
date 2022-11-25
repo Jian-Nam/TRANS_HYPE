@@ -169,6 +169,7 @@ class App{
 
         objLoader.load(url, (obj)=>{
             obj.children[0].material = new THREE.MeshNormalMaterial();
+            obj.position.set(0, 0, 0);
             this._scene.add( obj );
             this.objects.push(obj);
         });

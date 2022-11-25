@@ -366,6 +366,7 @@ hr{
 #infographic{
     font-family: 'JetBrains Mono', monospace;
     font-size: 1.5vh;
+    font-weight: 800;
     color:white;
 
     z-index: 1;
@@ -375,7 +376,7 @@ hr{
     top:20%;
     left:2vh;
 
-    width:15%;
-    height:60%;
+    width:20%;
+    height:70%;
 
 }

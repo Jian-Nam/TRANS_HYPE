@@ -53,7 +53,7 @@ export class real_space{
             100
         );
         //camera.position.z = 9;
-        camera.position.set(0, 3, 0);
+        camera.position.set(0, 4, 0);
 
 
 
