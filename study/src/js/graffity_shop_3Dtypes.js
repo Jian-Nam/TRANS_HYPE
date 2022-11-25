@@ -52,34 +52,7 @@ export class graffity_shop_3Dtypes{
     }
 
     _setupModel() {
-        // gltfLoader.load("./src/digital_graffities/test.glb", (gltf)=> {
-        //     const model = gltf.scene;
-
-        //     model.traverse(child => {
-        //         if(child instanceof THREE.Mesh){
-        //             child.material = new THREE.MeshNormalMaterial({transparent:true, opacity:0.9});
-        //             console.log(child.position)
-        //             child.position.set(0, 0, 0)
-        //         }
-
-        //     })
-        //     this._scene.add(model);
-        //     console.log(model);
-
-        //     const animationClips = gltf.animations;
-        //     const mixer = new THREE.AnimationMixer(model);
-        //     const animationsMap = {};
-        //     animationClips.forEach(clip => {
-        //         const name = clip.name;
-        //         console.log(name);
-        //         animationsMap[name] = mixer.clipAction(clip);
-        //     });
-
-        //     this._mixer = mixer;
-        //     this._animationMap = animationsMap;
-        //     this._currentAnimationAction = this._animationMap["Curve.001Action"];
-        //     this._currentAnimationAction.play();
-        // })
+        this.gltfLoader = new GLTFLoader();
         this.objects = [];
     }
 
@@ -88,7 +61,6 @@ export class graffity_shop_3Dtypes{
     }
 
     reset_model(name){
-        const objLoader = new OBJLoader();
         let object_names = [name]
 
         for(let i = 0; i< this.objects.length; i++){ 
@@ -99,18 +71,18 @@ export class graffity_shop_3Dtypes{
 
         for(let i = 0; i< object_names.length; i++){ 
             let directory = './study/src/digital_graffities/' + object_names[i]
-            objLoader.load(directory, (obj)=>{
-                obj.children[0].position.set(0, 0, 0);
-                obj.children[0].material = new THREE.MeshNormalMaterial({transparent:true, opacity: 0.9});
+            this.gltfLoader.load(directory, (glb)=>{
+                let model = glb.scene
+                model.children[0].position.set(0, 0, 0);
+                model.children[0].material = new THREE.MeshNormalMaterial({transparent:true, opacity: 0.9});
                 
-                this._scene.add( obj );
-                this.objects.push(obj);
+                this._scene.add( model );
+                this.objects.push(model);
             })
         }
     }
 
     reset_model_v3(name){
-        const objLoader = new OBJLoader();
         let object_names = [name]
 
         for(let i = 0; i< this.objects.length; i++){ 
@@ -121,15 +93,12 @@ export class graffity_shop_3Dtypes{
 
         for(let i = 0; i< object_names.length; i++){ 
             let directory = './study/src/digital_graffities/' + object_names[i]
-            objLoader.load(directory, (obj)=>{
-                obj.children[0].position.set(0, 0, 0);
-                // obj.children[0].material = new THREE.MeshNormalMaterial({transparent:true, opacity: 0.9});
-                const edges = new THREE.EdgesGeometry( obj.children[0].geometry );
-                const line = new THREE.LineSegments( edges, new THREE.LineBasicMaterial( { color: 0x00ffff, linewidth: 100} ) );
-                this._scene.add( line );
-                
-                this._scene.add( line );
-                this.objects.push(line);
+            this.gltfLoader.load(directory, (glb)=>{
+                let model =glb.scene;
+                model.children[0].position.set(0, 0, 0);
+                model.children[0].material = new THREE.MeshNormalMaterial({transparent:true, opacity: 0.9});
+                this._scene.add( model );
+                this.objects.push(model);
             })
         }
     }

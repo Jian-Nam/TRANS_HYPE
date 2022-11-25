@@ -1,7 +1,7 @@
 import * as THREE from '../../build/three.module.js'
 import { GLTFLoader } from "../../examples/jsm/loaders/GLTFLoader.js"
 import { OBJLoader } from "../../examples/jsm/loaders/OBJLoader.js"
-import { Area_table, Place_table } from '../db/database.js';
+import { Area_table, Place_table, Graffity_table } from '../db/database.js';
 
 
 
@@ -20,9 +20,6 @@ export class virtual_space{
         this.area_price = document.querySelector('#Price');
         this.building_size = document.querySelector('#Building_size');
 
-        this.time_stamp = document.querySelector('#time_stamp');
-        this.camera_position =document.querySelector('#camera_position');
-
         const renderer = new THREE.WebGL1Renderer({antialias: true});
         renderer.setPixelRatio(window.devicePixelRatio);
         this.container.appendChild(renderer.domElement);
@@ -32,7 +29,6 @@ export class virtual_space{
         this._scene = scene;
 
 
-
         this._setupCamera();
         this._setupLight();
         this._setupModel();
@@ -40,7 +36,6 @@ export class virtual_space{
         // this._setupBackground1();
         this._setupBackground2();
         this.import_graffiti();
-        this._setupControls1();
 
 
         this.resize();
@@ -89,6 +84,8 @@ export class virtual_space{
     }
 
     _setupModel() {
+
+
 
         const gltfLoader = new GLTFLoader();
         gltfLoader.load("./study/src/maps/virtual_edges.glb", (gltf)=> {
@@ -165,63 +162,9 @@ export class virtual_space{
 
     }
 
-    _setupBackground1(){
-        const gltfLoader = new GLTFLoader();
-
-        let gap = 63;
-        gltfLoader.load("./study/src/maps/virtual_background3.glb", (gltf)=> {
-            const model = gltf.scene;
-            // model.rotation.z = Math.PI/2
-            model.position.set(gap, 0, 0);  
-            // model.rotation.z = Math.PI/18;
-
-            this._scene.add(model);
-            this.cylinder_right = model;
-
-            const animationClips = gltf.animations;
-            const mixer = new THREE.AnimationMixer(model);
-            const animationsMap = {};
-            animationClips.forEach(clip => {
-                mixer.clipAction(clip).play();
-            });
-
-            this._mixer = mixer;
-
-            this._animationMap = animationsMap;
-
-            // for(let id in animationsMap){
-            //     animationsMap[id].play();
-            // }
-        })
-        gltfLoader.load("./study/src/maps/virtual_background4.glb", (gltf)=> {
-            const model = gltf.scene;
-            // model.rotation.z = Math.PI/2
-            model.position.set(-gap, 0, 0);  
-            // model.rotation.z = Math.PI/18;
-
-            this._scene.add(model);
-            this.cylinder_left = model;
-
-            const animationClips = gltf.animations;
-            const mixer = new THREE.AnimationMixer(model);
-            const animationsMap = {};
-            animationClips.forEach(clip => {
-                mixer.clipAction(clip).play();
-            });
-
-            // this._mixer = mixer;
-
-            // this._animationMap = animationsMap;
-
-            // for(let id in animationsMap){
-            //     animationsMap[id].play();
-            // }
-        })
-
-    }
-
     _setupBackground2(){
         const gltfLoader = new GLTFLoader();
+        this.gltfLoader = gltfLoader
         gltfLoader.load("./study/src/maps/virtual_background2.glb", (gltf)=> {
             const model = gltf.scene;
             // model.rotation.z = Math.PI/2
@@ -235,7 +178,6 @@ export class virtual_space{
             // })
             this._scene.add(model);
             this.bg2 = model;
-            console.log(model)
 
             const animationClips = gltf.animations;
             const mixer = new THREE.AnimationMixer(model);
@@ -266,16 +208,24 @@ export class virtual_space{
     }
 
     import_graffiti(){
-        const objLoader = new OBJLoader();
-        objLoader.load("./study/src/digital_graffities/g001_v2.obj", (obj)=> {
-            const model = obj;
+        this.graffiti_srcs = []
+        for(let g in Graffity_table){
+            this.graffiti_srcs.push("./study/src/digital_graffities/" + Graffity_table[g].v2);
+            this.graffiti_srcs.push("./study/src/digital_graffities/" + Graffity_table[g].v3);
+        }
+        this.gltfLoader.load(this.graffiti_srcs[0], (glb)=> {
+            const model = glb.scene;
             model.rotation.x = -Math.PI/2
-            model.position.set(0, 0, 2);  
-            model.scale.set(2, 2, 2)
+            model.position.set(0, -10, 0);  
+            model.scale.set(15, 15, 15);
+            this.current_graffiti = model;
 
             model.traverse(child => {
                 if(child instanceof THREE.Mesh){
-                    child.material = new THREE.MeshBasicMaterial({color:0x00ffff})
+                    this.graffiti_material1 = new THREE.MeshNormalMaterial({});
+                    this.graffiti_material2 = new THREE.MeshBasicMaterial({color:0xffffff});
+                    child.material = this.graffiti_material1;
+                    this.graffiti = child;
                 }
             });
                 
@@ -283,41 +233,35 @@ export class virtual_space{
             // model.rotation.z = Math.PI/18;
 
             this._scene.add(model);
-            this.graffiti = model;
-        })
+        });
 
     }
+
+
+    reset_graffiti(index){
+            this._scene.remove(this.current_graffiti);
+            this.gltfLoader.load(this.graffiti_srcs[index], (glb)=> {
+                const model = glb.scene;
+                model.rotation.x = -Math.PI/2
+                model.position.set(0, -10, 0);  
+                model.scale.set(15, 15, 15);
+                this.current_graffiti = model;
+
+                model.traverse(child => {
+                    if(child instanceof THREE.Mesh){
+                        this.graffiti_material1 = new THREE.MeshNormalMaterial({});
+                        this.graffiti_material2 = new THREE.MeshBasicMaterial({color:0xffffff});
+                        child.material = this.graffiti_material1;
+                        this.graffiti = child;
+                    }
+                });
+
+                this._scene.add(model);
+            });
+        }
 
     
 
-    _setupControls1() {
-        this.container.addEventListener("wheel", (event) => {this.move_bg(event);})
-    }
-
-    _setupControls2() {
-        this.container.addEventListener("wheel", (event) => {this.move_bg2(event);})
-    }
-
-    move_bg(event){
-        event.preventDefault();
-        if(this.graffiti){
-            let speed = 0.0002;
-            this.graffiti.position.y += event.deltaY*speed*4
-            document.querySelector("#gg").scrollLeft += event.deltaY
-        }
-    }
-
-    move_bg2(event){
-        event.preventDefault();
-        let speed = 0.0002
-        if(this.bg2){
-            this.cylinder_left.rotation.z += event.deltaY*speed
-            this.cylinder_right.rotation.z -= event.deltaY*speed
-            // this.bg.rotation.z -= event.deltaY*speed
-            this.graffiti.position.y += event.deltaY*speed*4
-            // \this.model.rotation.y -= event.deltaY*speed
-        }
-    }
 
 
 
@@ -417,40 +361,25 @@ export class virtual_space{
 
 
     update(time) {
-        this._renderer.setClearColor( 0x000000, 0);
+        this._renderer.setClearColor( 0x000000, 1);
         //auto rotation
         time *= 0.001; // second unit
-        const date = new Date(Date.now())
-
-        this.time_stamp.innerHTML = date;
-        this.camera_position.innerHTML = 
-            "CAMERA POSITION (X: " + this._camera.position.x.toFixed(3) + 
-            " Y: " + this._camera.position.y.toFixed(3) +  
-            " Z: " + this._camera.position.z.toFixed(3) + ")";
-        // if(this.bg2){
-        // if(this.bg2){
-        //     const deltaTime = time - this._previousTime;
-        //     let offset = 30;
-        //     this.bg.position.y  = Math.min(0 + time*offset, 120);
-        //     this.bg.rotation.y = time
-        //     this.bg2.position.y  = Math.min(-120 + time*offset, 0);
-        //     this.model.position.y  = Math.min(-120 + time*offset, 0);
-        //     // this.model.position.y  *= 0.999
-        //     for(let line of this.lines){
-        //         line.position.y = Math.min(-120 + time*offset, 0);
-        //     }
-        // }
-
-        if(this.cylinder_right &&this.cylinder_left){
-            const deltaTime = time - this._previousTime;
-            let speed = 0.2
-            this.cylinder_right.rotation.z -= deltaTime*speed
-            this.cylinder_left.rotation.z += deltaTime*speed
-
-        }
-        const deltaTime = time - this._previousTime;
-        document.querySelector("#gg").scrollLeft += deltaTime*100
         // console.log(deltaTime)
+        if(this.graffiti){
+            this.graffiti.rotation.z = Math.sin(time)/2;
+            this.graffiti.position.y = Math.sin(time*4)/16;
+        }
+
+        let cycle =  parseInt((time/Math.PI)%this.graffiti_srcs.length)+1
+
+        if(this._previousCycle){
+            console.log(cycle)
+            if(cycle != this._previousCycle){
+                this.reset_graffiti(cycle-1);
+            }
+        }
+        this._previousCycle = cycle;
+
 
         //show animation
         if(this._mixer) {
@@ -480,13 +409,21 @@ export class virtual_space{
                             this.go_closer(point)
                         }else{
                             // this.raycasting_obj[i].position.y = this.raycasting_obj[i].position.y * 0.7;
-                            this.raycasting_obj[i].material.opacity = 0.7;
+                            if(Area_table[this.raycasting_obj[i].name].owner == "None"){
+                                this.raycasting_obj[i].material.opacity = 0.7;
+                            }else{
+                                this.raycasting_obj[i].material.opacity = 0.1;
+                            }
                         }
                     }
                 }else {
                     this.discription.style.right = "-135vh";
                     for(let i = 0; i < this.raycasting_obj.length; i++){
-                        this.raycasting_obj[i].material.opacity = 0.7;
+                        if(Area_table[this.raycasting_obj[i].name].owner == "None"){
+                            this.raycasting_obj[i].material.opacity = 0.7;
+                        }else{
+                            this.raycasting_obj[i].material.opacity = 0.1;
+                        }
                         this.raycasting_obj[i].position.y = this.raycasting_obj[i].position.y * 0.7;
                     }
                     this.come_back();

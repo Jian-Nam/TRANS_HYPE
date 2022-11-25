@@ -161,13 +161,6 @@ body {
 
 #virtual_map_2d{
     position:absolute;
-    top:0;
-    bottom:0;
-    right:10%;
-
-    margin-top: auto;
-    margin-bottom:auto;
-
     width:100%;
     height:100%;
     z-index: 1;

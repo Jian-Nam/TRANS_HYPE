@@ -125,7 +125,7 @@ class App {
 
         this.v0.src = "./study/src/vectors/" + Graffity_table[id].v1;
         this.v1_THREEjs.reset_model(Graffity_table[id].v2);
-        this.v2_THREEjs.reset_model_v3(Graffity_table[id].v2);
+        this.v2_THREEjs.reset_model(Graffity_table[id].v3);
     }
 
     go_lists(){
