@@ -399,7 +399,7 @@ let Area_table = {
 }
 
 let Graffity_table = {
-    "g001": {gid:"#11W19M", size: "30*30mm", price: "2000$", v1:"g001_v1.svg", v2: "g001_v2.glb", v3: "g001_v3.glb"},
+    "g001": {gid:"#11W19M", size: "30*30mm", price: "2000$", v1:"g001_v1.svg", v2: "g001_v2.glb", v3: "geonode_instance_test1.glb"},
     "g002": {gid :"#611W19M", size: "30*30mm", price: "1000$", v1:"g002_v1.svg", v2: "g002_v2.glb", v3: "g002_v3.glb"},
     "g003": {gid:"#W21M", size: "30*30mm", price: "3000$", v1:"g003_v1.svg", v2: "g003_v2.glb", v3: "g003_v3.glb"},
     "g004": {gid:"#29W21M1", size: "30*30mm", price: "4000$", v1:"g004_v1.svg", v2: "g004_v2.glb", v3: "g004_v3.glb"},

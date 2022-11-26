@@ -179,14 +179,7 @@ export class virtual_space{
             this._scene.add(model);
             this.bg2 = model;
 
-            const animationClips = gltf.animations;
-            const mixer = new THREE.AnimationMixer(model);
-            const animationsMap = {};
-            animationClips.forEach(clip => {
-                mixer.clipAction(clip).play();
-            });
 
-            // this._mixer = mixer;
 
             // this._animationMap = animationsMap;
 
@@ -228,6 +221,14 @@ export class virtual_space{
                     this.graffiti = child;
                 }
             });
+
+            const animationClips = glb.animations;
+            const mixer = new THREE.AnimationMixer(model);
+            animationClips.forEach(clip => {
+                mixer.clipAction(clip).play();
+            });
+
+            this._mixer = mixer;
                 
     
             // model.rotation.z = Math.PI/18;
@@ -255,6 +256,14 @@ export class virtual_space{
                         this.graffiti = child;
                     }
                 });
+
+                const animationClips = glb.animations;
+                const mixer = new THREE.AnimationMixer(model);
+                animationClips.forEach(clip => {
+                    mixer.clipAction(clip).play();
+                });
+    
+                this._mixer = mixer;
 
                 this._scene.add(model);
             });

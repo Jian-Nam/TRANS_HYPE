@@ -75,9 +75,18 @@ export class graffity_shop_3Dtypes{
                 let model = glb.scene
                 model.children[0].position.set(0, 0, 0);
                 model.children[0].material = new THREE.MeshNormalMaterial({transparent:true, opacity: 0.9});
-                
+                model.children[0].material.morphTargets = true;
+
                 this._scene.add( model );
                 this.objects.push(model);
+
+                const animationClips = glb.animations;
+                console.log(animationClips)
+                const mixer = new THREE.AnimationMixer(model);
+                animationClips.forEach(clip => {
+                    mixer.clipAction(clip).play();
+                });
+                this._mixer = mixer;
             })
         }
     }
