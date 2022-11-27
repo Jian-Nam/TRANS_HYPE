@@ -73,8 +73,14 @@ export class graffity_shop_3Dtypes{
             let directory = './study/src/digital_graffities/' + object_names[i]
             this.gltfLoader.load(directory, (glb)=>{
                 let model = glb.scene
-                model.children[0].position.set(0, 0, 0);
-                model.children[0].material = new THREE.MeshNormalMaterial({transparent:true, opacity: 0.9});
+                model.position.set(0, 0, 0);
+                model.traverse(child => {
+                    if(child instanceof THREE.Mesh){
+                        this.graffiti_material1 = new THREE.MeshNormalMaterial({});
+                        this.graffiti_material2 = new THREE.MeshBasicMaterial({color:0xffffff});
+                        child.material = this.graffiti_material1;
+                    }
+                });
                 model.children[0].material.morphTargets = true;
 
                 this._scene.add( model );

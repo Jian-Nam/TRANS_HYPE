@@ -58,7 +58,7 @@ export class virtual_space{
             1000
         );
         //camera.position.z = 9;
-        camera.position.set(0, 10, 0);
+        camera.position.set(0, 0, 8);
         this.camera_origin = camera.position.clone();
         this.camera_lookat = new THREE.Vector3(0, 0, 0);
         camera.lookAt(this.camera_lookat);
@@ -111,21 +111,16 @@ export class virtual_space{
             //     animationsMap[id].play();
             // }
         })
-        const size = 100;
-        const divisions = 60;
-
-        const gridHelper = new THREE.GridHelper( size, divisions );
-        // this._scene.add( gridHelper );
 
         const objLoader = new OBJLoader();
 
-        objLoader.load("./study/src/maps/virtual.obj", (obj) => {
-            this.model = obj
-            this._scene.add(obj);
-            obj.position.set(0, 0, 0);
+        gltfLoader.load("./study/src/maps/virtual.glb", (glb) => {
+            let model = glb.scene
+            this._scene.add(model);
+            model.position.set(0, 0, 0);
             // obj.rotation.x = -Math.PI/2
 
-            this.architecture = obj;
+            this.architecture = model;
             this.raycasting_obj = [];
             // console.log(this.architecture);
 
@@ -146,13 +141,6 @@ export class virtual_space{
                     
                     // child.material = new THREE.MeshBasicMaterial({color:0x00ff00, wireframe:true});
                     this.raycasting_obj.push(child);
-
-                    const edges = new THREE.EdgesGeometry( child.geometry );
-                    const line = new THREE.LineSegments( edges, new THREE.LineBasicMaterial( { color: 0xffffff, linewidth: 100} ) );
-                    line.position.set(0, 0, 0);
-                    this.lines.push(line);
-
-                    this._scene.add( line );
 
                 }
             })
@@ -208,8 +196,7 @@ export class virtual_space{
         }
         this.gltfLoader.load(this.graffiti_srcs[0], (glb)=> {
             const model = glb.scene;
-            model.rotation.x = -Math.PI/2
-            model.position.set(0, -10, 0);  
+            model.position.set(0, 0 , 10);  
             model.scale.set(15, 15, 15);
             this.current_graffiti = model;
 
@@ -218,9 +205,10 @@ export class virtual_space{
                     this.graffiti_material1 = new THREE.MeshNormalMaterial({});
                     this.graffiti_material2 = new THREE.MeshBasicMaterial({color:0xffffff});
                     child.material = this.graffiti_material1;
-                    this.graffiti = child;
+
                 }
             });
+            this.graffiti = model;
 
             const animationClips = glb.animations;
             const mixer = new THREE.AnimationMixer(model);
@@ -240,22 +228,24 @@ export class virtual_space{
 
 
     reset_graffiti(index){
+        if(this.current_graffiti){
             this._scene.remove(this.current_graffiti);
+        }
             this.gltfLoader.load(this.graffiti_srcs[index], (glb)=> {
                 const model = glb.scene;
-                model.rotation.x = -Math.PI/2
-                model.position.set(0, -10, 0);  
+                model.position.set(0, 0, -10);  
                 model.scale.set(15, 15, 15);
                 this.current_graffiti = model;
+                this.graffiti = model;
 
                 model.traverse(child => {
                     if(child instanceof THREE.Mesh){
                         this.graffiti_material1 = new THREE.MeshNormalMaterial({});
                         this.graffiti_material2 = new THREE.MeshBasicMaterial({color:0xffffff});
                         child.material = this.graffiti_material1;
-                        this.graffiti = child;
                     }
                 });
+
 
                 const animationClips = glb.animations;
                 const mixer = new THREE.AnimationMixer(model);
@@ -353,7 +343,7 @@ export class virtual_space{
         let fraction = 0.03;
         let camera_offset_height = 3
 
-        point.y += camera_offset_height;
+        point.z += camera_offset_height;
         point.multiplyScalar(fraction);
 
         this._camera.position.multiplyScalar(1-fraction);
@@ -362,10 +352,10 @@ export class virtual_space{
 
     come_back(){
         let fraction = 0.03;
-        let root_position_y = 10;
+        let root_position_z = 8;
 
         this._camera.position.multiplyScalar(1-fraction);
-        this._camera.position.y += fraction * root_position_y;
+        this._camera.position.z += fraction * root_position_z;
     }
 
 
@@ -375,8 +365,8 @@ export class virtual_space{
         time *= 0.001; // second unit
         // console.log(deltaTime)
         if(this.graffiti){
-            this.graffiti.rotation.z = Math.sin(time)/2;
-            this.graffiti.position.y = Math.sin(time*4)/16;
+            this.graffiti.rotation.y = Math.sin(time)/2;
+            this.graffiti.position.y = Math.sin(time*4)/1;
         }
 
         let cycle =  parseInt((time/Math.PI)%this.graffiti_srcs.length)+1
