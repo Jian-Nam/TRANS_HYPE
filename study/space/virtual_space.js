@@ -58,7 +58,7 @@ export class virtual_space{
             1000
         );
         //camera.position.z = 9;
-        camera.position.set(0, 0, 8);
+        camera.position.set(0, 0, 9);
         this.camera_origin = camera.position.clone();
         this.camera_lookat = new THREE.Vector3(0, 0, 0);
         camera.lookAt(this.camera_lookat);
@@ -135,7 +135,7 @@ export class virtual_space{
                         // child.material = new THREE.MeshBasicMaterial({color: 0x00ff00, transparent:true, opacity:0.7});
                         child.material = new THREE.MeshBasicMaterial({color: 0x00ffff, transparent:true, opacity:0.7});
                     }else{
-                        child.material = new THREE.MeshBasicMaterial({color: 0xffffff, transparent:true, opacity:0.7});
+                        child.material = new THREE.MeshBasicMaterial({color: 0x606060, transparent:true, opacity:0.7});
                         // child.material = new THREE.MeshBasicMaterial({color: 0x9900ff, transparent:true, opacity:0.7});
                     }
                     
@@ -168,23 +168,13 @@ export class virtual_space{
             this.bg2 = model;
 
 
-
-            // this._animationMap = animationsMap;
-
-            // for(let id in animationsMap){
-            //     animationsMap[id].play();
-            // }
+            const animationClips = gltf.animations;
+            const mixer = new THREE.AnimationMixer(model);
+            animationClips.forEach(clip => {
+                mixer.clipAction(clip).play();
+            });
+            this._mixer_bg = mixer;
         });
-
-        this.bg_imgs = document.querySelector("#gg")
-        // for(let place in Place_table){
-        //     let place_info = Place_table[place];
-        //     let img = document.createElement("img");
-        //     let figure = document.createElement("figure");
-        //     img.src = "./study/src/photoes/" + place_info.pic2;
-        //     figure.append(img)
-        //     this.bg_imgs.append(figure);
-        // }
         
     }
 
@@ -196,7 +186,7 @@ export class virtual_space{
         }
         this.gltfLoader.load(this.graffiti_srcs[0], (glb)=> {
             const model = glb.scene;
-            model.position.set(0, 0 , 10);  
+            model.position.set(0, 0 , -10);  
             model.scale.set(15, 15, 15);
             this.current_graffiti = model;
 
@@ -241,8 +231,12 @@ export class virtual_space{
                 model.traverse(child => {
                     if(child instanceof THREE.Mesh){
                         this.graffiti_material1 = new THREE.MeshNormalMaterial({});
-                        this.graffiti_material2 = new THREE.MeshBasicMaterial({color:0xffffff});
-                        child.material = this.graffiti_material1;
+                        this.graffiti_material2 = new THREE.MeshBasicMaterial({color:0x00ffff});
+                        if(index%2 == 0){
+                            child.material = this.graffiti_material1;
+                        }else{
+                            child.material = this.graffiti_material2;
+                        }
                     }
                 });
 
@@ -352,7 +346,7 @@ export class virtual_space{
 
     come_back(){
         let fraction = 0.03;
-        let root_position_z = 8;
+        let root_position_z = 9;
 
         this._camera.position.multiplyScalar(1-fraction);
         this._camera.position.z += fraction * root_position_z;
@@ -381,9 +375,10 @@ export class virtual_space{
 
 
         //show animation
-        if(this._mixer) {
+        if(this._mixer && this._mixer_bg) {
             const deltaTime = time - this._previousTime;
             this._mixer.update(deltaTime);
+            this._mixer_bg.update(deltaTime);
 
         }
         this._previousTime = time;
@@ -409,9 +404,9 @@ export class virtual_space{
                         }else{
                             // this.raycasting_obj[i].position.y = this.raycasting_obj[i].position.y * 0.7;
                             if(Area_table[this.raycasting_obj[i].name].owner == "None"){
-                                this.raycasting_obj[i].material.opacity = 0.7;
+                                this.raycasting_obj[i].material.opacity = 0.9;
                             }else{
-                                this.raycasting_obj[i].material.opacity = 0.1;
+                                this.raycasting_obj[i].material.opacity = 0.6;
                             }
                         }
                     }
@@ -419,9 +414,9 @@ export class virtual_space{
                     this.discription.style.right = "-135vh";
                     for(let i = 0; i < this.raycasting_obj.length; i++){
                         if(Area_table[this.raycasting_obj[i].name].owner == "None"){
-                            this.raycasting_obj[i].material.opacity = 0.7;
+                            this.raycasting_obj[i].material.opacity = 0.9;
                         }else{
-                            this.raycasting_obj[i].material.opacity = 0.1;
+                            this.raycasting_obj[i].material.opacity = 0.6;
                         }
                         this.raycasting_obj[i].position.y = this.raycasting_obj[i].position.y * 0.7;
                     }
