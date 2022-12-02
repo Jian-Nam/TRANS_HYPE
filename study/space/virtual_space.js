@@ -322,7 +322,7 @@ export class virtual_space{
         this.area_number.innerHTML = name;
         this.owner.innerHTML = area_info.owner;
         if(area_info.owner == "None"){
-            this.owner.style.color = "red"
+            this.owner.style.color = "#808080"
         }else{
             this.owner.style.color = "aqua"
         }

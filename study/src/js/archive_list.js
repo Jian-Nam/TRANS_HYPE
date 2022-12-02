@@ -48,7 +48,6 @@ class App{
         }
 
         this.show = document.querySelector("#show");
-        this.Place_id = document.querySelector("#Place_id");
         this.address_kr = document.querySelector("#address_kr")
         this.address_eng = document.querySelector("#address_eng")
         this.graffiti_size = document.querySelector("#graffiti_size")
@@ -95,7 +94,6 @@ class App{
 
     show_palce(current_id){
         this.show.scroll(0, 0);
-        this.Place_id.innerHTML = "Place id - " + current_id + "<br><br>";
         this.address_kr.innerHTML = Place_table[current_id].address_kr;
         this.address_eng.innerHTML = Place_table[current_id].address_eng;
         this.graffiti_size.innerHTML = "Graffiti Size : " + Place_table[current_id].graffiti_size;

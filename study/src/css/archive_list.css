@@ -221,15 +221,18 @@ body {
 #p01{
     width:100%;
     object-fit: contain;
+    opacity: 0.5;
 }
 #p02{
     width:100%;
     object-fit: contain;
+    opacity: 0.5;
 }
 
 #p03{
     width:100%;
     object-fit: contain;
+    opacity: 0.5;
 }
 
 

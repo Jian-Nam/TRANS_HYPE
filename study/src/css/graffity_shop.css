@@ -265,7 +265,7 @@ li > img {
 #bottom_bar1{
     position:absolute;
     font-size: 1vw;
-    color: #bb00ff;
+    color: #00ffff;
     bottom: 3vh;
     white-space: nowrap;
     overflow: hidden;
@@ -281,7 +281,7 @@ li > img {
 #bottom_bar2{
     position:absolute;
     font-size: 1vw;
-    color: #bb00ff;
+    color: #00ffff;
     bottom: 3vh;
     white-space: nowrap;
     overflow: hidden;
