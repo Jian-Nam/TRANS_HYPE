@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./index.css" />
+    <link rel="stylesheet" href="../../components/rightPanel/setupMenu.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.154.0/build/three.module.js",
+          "three/addons/loaders/": "https://cdn.jsdelivr.net/npm/three@0.154.0/examples/jsm/loaders/"
+        }
+      }
+    </script>
+    <title>TRANS_HYPE</title>
+    <script type="module" src="./index.js"></script>
+  </head>
+  <body>
+    <div id="Area" class="text">
+      <div id="Area_id">Area_A01</div>
+      <div id="Area_info">
+        <div id="Area_size">Area_size: 200*300*200</div>
+        <div id="Occupied">Occupied_by</div>
+        <div id="Area_owner">NONE</div>
+      </div>
+    </div>
+
+    <div id="area_list_container">
+      <div id="window" , class="text">
+        <div id="window_title">Area Selection Window</div>
+      </div>
+      <ul id="area_list" class="text"></ul>
+    </div>
+    <div id="canvus_container"></div>
+    <div id="virtual_map_2d"></div>
+  </body>
+</html>
