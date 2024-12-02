@@ -1,11 +1,12 @@
 import { virtual_space } from "./virtual_space.js";
 import { virtual_space_individual } from "./virtual_space_individual.js";
-import { setupMenu } from "../../components/rightPanel/setupMenu.js";
+
+import { createHeader } from "../../components/rightPanel/navigator.js";
 
 class App {
   constructor() {
+    document.body.prepend(createHeader());
     this.setupWebpage();
-    this.setupMenu = new setupMenu();
 
     this.virtual_space_individual = new virtual_space_individual();
     this.virtual_space = new virtual_space(this.virtual_space_individual);

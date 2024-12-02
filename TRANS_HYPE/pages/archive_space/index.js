@@ -1,11 +1,11 @@
 import { real_space } from "./real_space.js";
-import { setupMenu } from "../../components/rightPanel/setupMenu.js";
+import { createHeader } from "/TRANS_HYPE/components/rightPanel/navigator.js";
 
 class App {
   constructor() {
     this.setupWebpage();
     this.real_space = new real_space();
-    this.setupMenu = new setupMenu();
+    document.body.prepend(createHeader());
     window.onresize = this.resize.bind(this);
   }
 

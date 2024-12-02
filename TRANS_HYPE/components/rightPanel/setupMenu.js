@@ -58,25 +58,25 @@ export class setupMenu {
 
     this.menu_elements = document.querySelector("#menu").children;
 
-    for (let i = 0; i < this.menu_elements.length; i++) {
-      if (i == page_index) {
-        this.menu_elements[i].style.color = "#bb00ff";
-        this.menu_elements[i].style.background = "#00ffff";
-      } else {
-        this.menu_elements[i].addEventListener("mouseover", (event) => {
-          this.menu_elements[i].style.color = "#bb00ff";
-          // this.menu_elements[i].style.width = "8vh";
-          // this.menu_elements[i].style.lineHeight = "8vh";
-          this.menu_elements[i].style.background = "#00ffff";
-        });
-        this.menu_elements[i].addEventListener("mouseout", (event) => {
-          this.menu_elements[i].style.color = "#ffffff";
-          this.menu_elements[i].style.width = "4vh";
-          this.menu_elements[i].style.lineHeight = "4vh";
-          this.menu_elements[i].style.background = "#bb00ff";
-        });
-      }
-    }
+    // for (let i = 0; i < this.menu_elements.length; i++) {
+    //   if (i == page_index) {
+    //     this.menu_elements[i].style.color = "#bb00ff";
+    //     this.menu_elements[i].style.background = "#00ffff";
+    //   } else {
+    //     this.menu_elements[i].addEventListener("mouseover", (event) => {
+    //       this.menu_elements[i].style.color = "#bb00ff";
+    //       // this.menu_elements[i].style.width = "8vh";
+    //       // this.menu_elements[i].style.lineHeight = "8vh";
+    //       this.menu_elements[i].style.background = "#00ffff";
+    //     });
+    //     this.menu_elements[i].addEventListener("mouseout", (event) => {
+    //       this.menu_elements[i].style.color = "#ffffff";
+    //       this.menu_elements[i].style.width = "4vh";
+    //       this.menu_elements[i].style.lineHeight = "4vh";
+    //       this.menu_elements[i].style.background = "#bb00ff";
+    //     });
+    //   }
+    // }
 
     this.title.addEventListener("click", this.go_home.bind(this));
     this.toggle.addEventListener("click", this.change_mode.bind(this));

@@ -1,6 +1,6 @@
 import { Graffity_table } from "../../db/database.js";
 import { graffity_shop_3Dtypes } from "./graffity_shop_3Dtypes.js";
-import { setupMenu } from "../../components/rightPanel/setupMenu.js";
+import { createHeader } from "/TRANS_HYPE/components/rightPanel/navigator.js";
 
 class App {
   constructor() {
@@ -12,7 +12,7 @@ class App {
 
     this.v1_THREEjs = new graffity_shop_3Dtypes("#v1");
     this.v2_THREEjs = new graffity_shop_3Dtypes("#v2");
-    this.setup_menu = new setupMenu();
+    document.body.prepend(createHeader());
 
     window.onresize = this.resize.bind(this);
   }

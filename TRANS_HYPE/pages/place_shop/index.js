@@ -1,12 +1,12 @@
 import * as THREE from "three";
 import { OBJLoader } from "three/addons/loaders/OBJLoader.js";
 import { Area_table } from "../../db/database.js";
-import { setupMenu } from "../../components/rightPanel/setupMenu.js";
+import { createHeader } from "/TRANS_HYPE/components/rightPanel/navigator.js";
 
 class App {
   constructor() {
     this.assetPath = "../../assets/";
-    this.setup_menu = new setupMenu();
+    document.body.prepend(createHeader());
 
     this.area_list = document.querySelector("#area_list");
     this.area_list_container = document.querySelector("#area_list_container");
