@@ -102,9 +102,45 @@ class App {
       "Wall Size : " + Place_table[current_id].wall_size + "<br><br>";
     this.discription.innerHTML = Place_table[current_id].discription;
 
-    this.p01.src = this.archivePicturesPath + Place_table[current_id].pic2;
-    this.p02.src = this.archivePicturesPath + Place_table[current_id].pic3;
-    this.p03.src = this.archivePicturesPath + Place_table[current_id].pic1;
+    this.p01.src =
+      this.archivePicturesPath + "w320/" + Place_table[current_id].pic2;
+
+    this.p02.src =
+      this.archivePicturesPath + "w320/" + Place_table[current_id].pic3;
+
+    this.p03.src =
+      this.archivePicturesPath + "w320/" + Place_table[current_id].pic1;
+
+    this.p01.srcset = `
+      ${this.archivePicturesPath + "w320/" + Place_table[current_id].pic2} 320w,
+      ${this.archivePicturesPath + "w640/" + Place_table[current_id].pic2} 640w,
+      ${
+        this.archivePicturesPath + "w1024/" + Place_table[current_id].pic2
+      } 1024w,
+    `;
+
+    this.p02.srcset = `
+      ${this.archivePicturesPath + "w320/" + Place_table[current_id].pic3} 320w,
+      ${this.archivePicturesPath + "w640/" + Place_table[current_id].pic3} 640w,
+      ${
+        this.archivePicturesPath + "w1024/" + Place_table[current_id].pic3
+      } 1024w,
+    `;
+
+    this.p03.srcset = `
+      ${this.archivePicturesPath + "w320/" + Place_table[current_id].pic1} 320w,
+      ${this.archivePicturesPath + "w640/" + Place_table[current_id].pic1} 640w,
+      ${
+        this.archivePicturesPath + "w1024/" + Place_table[current_id].pic1
+      } 1024w,
+    `;
+
+    this.p01.sizes =
+      "(max-width: 500px) 320px, (max-width: 800px) 640px, 1024px";
+    this.p02.sizes =
+      "(max-width: 500px) 320px, (max-width: 800px) 640px, 1024px";
+    this.p03.sizes =
+      "(max-width: 500px) 320px, (max-width: 800px) 640px, 1024px";
   }
 
   resize() {
