@@ -32,4 +32,4 @@ jobs:
           git checkout -b dist || git checkout dist
           git add .
           git commit -m "Moved files from TRANS_HYPE to root"
-          git push origin dist
+          git push --force origin dist
