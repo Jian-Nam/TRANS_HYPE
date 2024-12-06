@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import { OBJLoader } from "three/addons/loaders/OBJLoader.js";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { Place_table } from "../../db/database.js";
 
 export class real_space {
@@ -69,10 +70,11 @@ export class real_space {
     this._scene.add(gridHelper);
 
     const objLoader = new OBJLoader();
-    objLoader.load(
-      this.assetPath + "maps/archive/archive object.obj",
+    const gltfLoader = new GLTFLoader();
+    gltfLoader.load(
+      this.assetPath + "maps/archive/archive_object.glb",
       (obj) => {
-        obj.traverse((child) => {
+        obj.scene.traverse((child) => {
           if (child instanceof THREE.Mesh) {
             child.material = new THREE.MeshBasicMaterial({ color: 0xffffff });
 
@@ -81,11 +83,12 @@ export class real_space {
               edges,
               new THREE.LineBasicMaterial({ color: 0x000000, linewidth: 100 })
             );
+            line.rotation.x = Math.PI / 2;
             this._scene.add(line);
           }
         });
         this._s;
-        this._scene.add(obj);
+        this._scene.add(obj.scene);
       }
     );
 
