@@ -1,0 +1,17 @@
+.place_info {
+  font-family: "Noto Sans KR", sans-serif;
+  color: white;
+
+  font-size: 1.2vw;
+  font-weight: 900;
+  line-height: 170%;
+
+  word-break: keep-all;
+  z-index: 2;
+}
+
+.interview {
+  font-size: 2vw;
+  font-weight: 900;
+  line-height: 170%;
+}

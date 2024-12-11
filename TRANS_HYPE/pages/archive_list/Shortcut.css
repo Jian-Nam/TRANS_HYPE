@@ -1,0 +1,13 @@
+._shortcut > button {
+  border: none;
+  outline: none;
+  background-color: inherit;
+  cursor: pointer;
+  color: gray;
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+._shortcut > button:hover,
+._shortcut > button:focus {
+  color: white;
+}
