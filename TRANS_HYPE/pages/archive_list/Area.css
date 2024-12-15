@@ -1,0 +1,26 @@
+.area_container {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  /* background: rgb(20, 20, 20); */
+}
+
+.picture1 {
+  width: 50%;
+  object-fit: contain;
+  opacity: 0.5;
+  transform: translateY(50%);
+}
+
+.picture2 {
+  width: 50%;
+  object-fit: contain;
+  opacity: 0.5;
+}
+
+.description {
+  position: absolute;
+  left: 5%;
+  width: 40%;
+}

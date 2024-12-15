@@ -1,151 +1,55 @@
 import { Place_table } from "../../db/database.js";
 import { createHeader } from "/TRANS_HYPE/components/rightPanel/navigator.js";
+import Area from "./Area.js";
+import Shortcut from "./Shortcut.js";
 
 class App {
   constructor() {
     document.body.prepend(createHeader());
-    this.archivePicturesPath = "../../assets/archive_pictures/";
-    this.title = document.querySelector("#title");
-    this.area_list = document.querySelector("#area_list");
-    this.area_list_container = document.querySelector("#area_list_container");
-
-    this.area_list_container.addEventListener("mouseover", () => {
-      // this.area_list_container.style.right = "4vh"
-    });
-    this.area_list_container.addEventListener("mouseout", () => {
-      // this.area_list_container.style.right = "-32vh"
+    this.area_list = document.querySelector(".area_list");
+    this.area_list.addEventListener("scroll", (e) => {
+      this.change_opacity();
     });
 
-    this.virtual_map_2d = document.querySelector("#virtual_map_2d");
+    this.shortcut_list = document.querySelector(".shortcut_list");
 
-    this.listElements = [];
+    const onClickShorcut = (e) => {
+      this.area_list_items[e.target.dataset.index].scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    };
+
+    this.onClickShorcut = onClickShorcut.bind(this);
+
+    let index = 0;
     for (let area_id in Place_table) {
-      let li_elem = document.createElement("li");
-      let area_id_elem = document.createElement("div");
-      let area_info_elem = document.createElement("div");
-      let address_kr_elem = document.createElement("div");
-      let address_eng_elem = document.createElement("div");
-
-      li_elem.setAttribute("id", area_id);
-
-      area_id_elem.classList.add("area_id");
-      area_info_elem.classList.add("area_info");
-      address_kr_elem.classList.add("address_kr");
-      address_eng_elem.classList.add("address_eng");
-
-      area_id_elem.innerHTML = area_id;
-      address_kr_elem.innerHTML = Place_table[area_id].address_kr;
-      address_eng_elem.innerHTML =
-        Place_table[area_id].address_eng + " Republic of Korea";
-
-      area_info_elem.append(address_kr_elem, address_eng_elem);
-      li_elem.append(area_id_elem, area_info_elem);
-
-      this.area_list.appendChild(li_elem);
-      this.listElements.push(li_elem);
+      const area = Place_table[area_id];
+      const shortcut = Shortcut(area, index, this.onClickShorcut);
+      this.shortcut_list.appendChild(shortcut);
+      this.area_list.appendChild(Area(area));
+      index++;
     }
 
-    this.show = document.querySelector("#show");
-    this.address_kr = document.querySelector("#address_kr");
-    this.address_eng = document.querySelector("#address_eng");
-    this.graffiti_size = document.querySelector("#graffiti_size");
-    this.graffiti_style = document.querySelector("#graffiti_style");
-    this.wall_size = document.querySelector("#wall_size");
-    this.discription = document.querySelector("#discription");
-
-    this.add_listPageEvent();
-
-    this.container = document.querySelector("#canvus_container");
-
-    this.p01 = document.querySelector("#p01");
-    this.p02 = document.querySelector("#p02");
-    this.p03 = document.querySelector("#p03");
-
-    this.show_palce("P01");
+    this.area_list_items = document.querySelectorAll(".area_list li");
 
     window.onresize = this.resize.bind(this);
     this.resize();
   }
 
-  add_listPageEvent() {
-    for (let value of this.listElements) {
-      value.addEventListener("mouseover", () => {
-        value.children[0].style.opacity = 1;
-        value.children[1].style.opacity = 1;
-        // value.style.paddingTop = "2vh";
-        // value.style.paddingBottom = "2vh";
-        value.style.background = "#101010";
-        // console.log(document.querySelector("#" + value.id + "_2d_map"))
-      });
-      value.addEventListener("mouseout", () => {
-        value.children[0].style.opacity = 0.5;
-        value.children[1].style.opacity = 0.5;
-        // value.style.paddingTop = "1vh";
-        // value.style.paddingBottom = "1vh";
-        value.style.background = "#000000";
-      });
-      value.addEventListener("click", (event) => {
-        this.show_palce(event.currentTarget.id);
-      });
-    }
-  }
-
-  show_palce(current_id) {
-    this.show.scroll(0, 0);
-    this.address_kr.innerHTML = Place_table[current_id].address_kr;
-    this.address_eng.innerHTML = Place_table[current_id].address_eng;
-    this.graffiti_size.innerHTML =
-      "Graffiti Size : " + Place_table[current_id].graffiti_size;
-    this.graffiti_style.innerHTML =
-      "Graffiti Style : " + Place_table[current_id].graffiti_style;
-    this.wall_size.innerHTML =
-      "Wall Size : " + Place_table[current_id].wall_size + "<br><br>";
-    this.discription.innerHTML = Place_table[current_id].discription;
-
-    this.p01.src =
-      this.archivePicturesPath + "w320/" + Place_table[current_id].pic2;
-
-    this.p02.src =
-      this.archivePicturesPath + "w320/" + Place_table[current_id].pic3;
-
-    this.p03.src =
-      this.archivePicturesPath + "w320/" + Place_table[current_id].pic1;
-
-    this.p01.srcset = `
-      ${this.archivePicturesPath + "w320/" + Place_table[current_id].pic2} 320w,
-      ${this.archivePicturesPath + "w640/" + Place_table[current_id].pic2} 640w,
-      ${
-        this.archivePicturesPath + "w1024/" + Place_table[current_id].pic2
-      } 1024w,
-    `;
-
-    this.p02.srcset = `
-      ${this.archivePicturesPath + "w320/" + Place_table[current_id].pic3} 320w,
-      ${this.archivePicturesPath + "w640/" + Place_table[current_id].pic3} 640w,
-      ${
-        this.archivePicturesPath + "w1024/" + Place_table[current_id].pic3
-      } 1024w,
-    `;
-
-    this.p03.srcset = `
-      ${this.archivePicturesPath + "w320/" + Place_table[current_id].pic1} 320w,
-      ${this.archivePicturesPath + "w640/" + Place_table[current_id].pic1} 640w,
-      ${
-        this.archivePicturesPath + "w1024/" + Place_table[current_id].pic1
-      } 1024w,
-    `;
-
-    this.p01.sizes =
-      "(max-width: 500px) 320px, (max-width: 800px) 640px, 1024px";
-    this.p02.sizes =
-      "(max-width: 500px) 320px, (max-width: 800px) 640px, 1024px";
-    this.p03.sizes =
-      "(max-width: 500px) 320px, (max-width: 800px) 640px, 1024px";
+  change_opacity() {
+    const texts = this.area_list.querySelectorAll(
+      ".place_info, .picture1, .picture2"
+    );
+    const target = this.area_list.getBoundingClientRect().height / 2;
+    texts.forEach((text) => {
+      const { top, bottom } = text.getBoundingClientRect();
+      text.style.opacity = String(100 - Math.abs(target - top) / 3) + "%";
+    });
   }
 
   resize() {
-    const width = this.container.clientWidth;
-    const height = this.container.clientHeight;
+    this.change_opacity();
   }
 }
 
